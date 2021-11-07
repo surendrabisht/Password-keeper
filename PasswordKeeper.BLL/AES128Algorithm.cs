@@ -6,31 +6,30 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordKeeper
+namespace PasswordKeeper.BLL
 {
 
     /// <summary>
     /// This code has been taken from Cryptography algo.
     /// and Not written by me
     /// </summary>
-    public static class StringCipher
+    public class AES128Algorithm : ICryptoAlgorithm
     {
-        private const int Keysize = 256;
-
+        private const int keySize = 128;
         private const int DerivationIterations = 1000;
 
-        public static string Encrypt(string plainText, string passPhrase)
+        public string Encrypt(string plainText, string passPhrase)
         {
-            byte[] array = StringCipher.Generate256BitsOfRandomEntropy();
-            byte[] array2 = StringCipher.Generate256BitsOfRandomEntropy();
+            byte[] array = Generate128BitsOfRandomEntropy();
+            byte[] array2 = Generate128BitsOfRandomEntropy();
             byte[] bytes = Encoding.UTF8.GetBytes(plainText);
             string result;
             using (Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(passPhrase, array, 1000))
             {
-                byte[] bytes2 = rfc2898DeriveBytes.GetBytes(32);
+                byte[] bytes2 = rfc2898DeriveBytes.GetBytes(16);
                 using (RijndaelManaged rijndaelManaged = new RijndaelManaged())
                 {
-                    rijndaelManaged.BlockSize = 256;
+                    rijndaelManaged.BlockSize = keySize;
                     rijndaelManaged.Mode = CipherMode.CBC;
                     rijndaelManaged.Padding = PaddingMode.PKCS7;
                     using (ICryptoTransform cryptoTransform = rijndaelManaged.CreateEncryptor(bytes2, array2))
@@ -53,19 +52,20 @@ namespace PasswordKeeper
             return result;
         }
 
-        public static string Decrypt(string cipherText, string passPhrase)
+        public string Decrypt(string cipherText, string passPhrase)
         {
             byte[] array = Convert.FromBase64String(cipherText);
-            byte[] salt = array.Take(32).ToArray<byte>();
-            byte[] rgbIV = array.Skip(32).Take(32).ToArray<byte>();
-            byte[] array2 = array.Skip(64).Take(array.Length - 64).ToArray<byte>();
+            byte[] salt = array.Take(16).ToArray<byte>();
+            byte[] rgbIV = array.Skip(16).Take(16).ToArray<byte>();
+
+            byte[] array2 = array.Skip(32).Take(array.Length - 32).ToArray<byte>();
             string @string;
             using (Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(passPhrase, salt, 1000))
             {
-                byte[] bytes = rfc2898DeriveBytes.GetBytes(32);
+                byte[] bytes = rfc2898DeriveBytes.GetBytes(16);
                 using (RijndaelManaged rijndaelManaged = new RijndaelManaged())
                 {
-                    rijndaelManaged.BlockSize = 256;
+                    rijndaelManaged.BlockSize = keySize;
                     rijndaelManaged.Mode = CipherMode.CBC;
                     rijndaelManaged.Padding = PaddingMode.PKCS7;
                     using (ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor(bytes, rgbIV))
@@ -87,9 +87,10 @@ namespace PasswordKeeper
             return @string;
         }
 
-        private static byte[] Generate256BitsOfRandomEntropy()
+
+        private byte[] Generate128BitsOfRandomEntropy()
         {
-            byte[] array = new byte[32];
+            byte[] array = new byte[16];
             using (RNGCryptoServiceProvider rNGCryptoServiceProvider = new RNGCryptoServiceProvider())
             {
                 rNGCryptoServiceProvider.GetBytes(array);

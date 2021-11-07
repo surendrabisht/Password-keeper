@@ -40,19 +40,19 @@
             // 
             // txtSite
             // 
-            this.txtSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSite.Location = new System.Drawing.Point(195, 61);
-            this.txtSite.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtSite.Location = new System.Drawing.Point(217, 76);
+            this.txtSite.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtSite.Name = "txtSite";
-            this.txtSite.Size = new System.Drawing.Size(303, 35);
+            this.txtSite.Size = new System.Drawing.Size(336, 35);
             this.txtSite.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 65);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(36, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 29);
             this.label1.TabIndex = 1;
@@ -62,8 +62,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(32, 151);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(36, 189);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 29);
             this.label2.TabIndex = 3;
@@ -71,19 +71,19 @@
             // 
             // txtUserId
             // 
-            this.txtUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserId.Location = new System.Drawing.Point(195, 151);
-            this.txtUserId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtUserId.Location = new System.Drawing.Point(217, 189);
+            this.txtUserId.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtUserId.Name = "txtUserId";
-            this.txtUserId.Size = new System.Drawing.Size(303, 35);
+            this.txtUserId.Size = new System.Drawing.Size(336, 35);
             this.txtUserId.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(32, 231);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(36, 289);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 29);
             this.label3.TabIndex = 5;
@@ -91,23 +91,23 @@
             // 
             // txtPwd
             // 
-            this.txtPwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPwd.Location = new System.Drawing.Point(195, 231);
-            this.txtPwd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtPwd.Location = new System.Drawing.Point(217, 289);
+            this.txtPwd.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtPwd.Name = "txtPwd";
-            this.txtPwd.Size = new System.Drawing.Size(303, 35);
+            this.txtPwd.Size = new System.Drawing.Size(336, 35);
             this.txtPwd.TabIndex = 4;
             this.txtPwd.UseSystemPasswordChar = true;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(78, 321);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(87, 401);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 44);
+            this.button1.Size = new System.Drawing.Size(132, 55);
             this.button1.TabIndex = 6;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = false;
@@ -116,12 +116,12 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(400, 321);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Location = new System.Drawing.Point(444, 401);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 44);
+            this.button2.Size = new System.Drawing.Size(132, 55);
             this.button2.TabIndex = 7;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = false;
@@ -129,10 +129,10 @@
             // 
             // CredentialEditForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::PasswordKeeper.Properties.Resources.BackgroundLocker;
-            this.ClientSize = new System.Drawing.Size(604, 380);
+            this.BackgroundImage = global::PasswordKeeper.Resource1.BackgroundLocker;
+            this.ClientSize = new System.Drawing.Size(671, 475);
             this.ControlBox = false;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -142,7 +142,7 @@
             this.Controls.Add(this.txtUserId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSite);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "CredentialEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit/Add Credential";

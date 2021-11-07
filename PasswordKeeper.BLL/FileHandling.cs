@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PasswordKeeper
+namespace PasswordKeeper.BLL
 {
     public enum CopyValue
     {
@@ -18,20 +18,30 @@ namespace PasswordKeeper
         UserId
     }
 
-    internal class FileHandling
+    public class FileHandling
     {
         static Thread thread = new Thread(CommandLine.RunClear);
-        private static string secretFilePath = Constants.CredentialFileName;
+        private static string secretFilePath = Request.GetInstance().CredentialFileName;
         private static bool IsChange = false;
 
-        public static void InsertOperation(Credential credential)
+        public static void InsertOperation(Credential credential, ICryptoAlgorithm algo)
         {
-            String[] contents = { credential.Description.Encrypt(), credential.UserName.Encrypt(), credential.Pwd.Encrypt() };
+            var encryptionObj = new CredentialsEncryption(algo);
+            String[] contents = { encryptionObj.Encrypt( credential.Description), encryptionObj.Encrypt(credential.UserName), encryptionObj.Encrypt(credential.Pwd) };
             File.AppendAllLines(FileHandling.secretFilePath, contents);
         }
 
-        public static void ReadCredential(CopyValue copyValue, int credentialSeqNo)
+        public static void ExportOperation(Credential credential,ICryptoAlgorithm algo, string Filename)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
+            String[] contents = { encryptionObj.Encrypt(credential.Description), encryptionObj.Encrypt(credential.UserName), encryptionObj.Encrypt(credential.Pwd) };
+            File.AppendAllLines(Filename+".dat", contents);
+        }
+
+
+        public static void ReadCredential(CopyValue copyValue, int credentialSeqNo, ICryptoAlgorithm algo)
+        {
+            var encryptionObj = new CredentialsEncryption(algo);
             if (thread.ThreadState == ThreadState.Running || thread.ThreadState==ThreadState.WaitSleepJoin)
             {
                 thread.Abort();            
@@ -44,7 +54,7 @@ namespace PasswordKeeper
                 string text = streamReader.ReadLine();
                 if (i == 3 * credentialSeqNo - (int)copyValue)
                 {
-                    text = text.Decrypt();
+                    text = encryptionObj.Decrypt( text);
                     // Console.WriteLine(" username : " + text + " . copied to clipboard");
                     CommandLine.RunCopy(text);
                     break;
@@ -55,8 +65,9 @@ namespace PasswordKeeper
             streamReader.Close();
         }
 
-        public static List<Credential> ViewAll()
+        public static List<Credential> ViewAll(ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             List<Credential> credentials = new List<Credential>();
             StreamReader streamReader = new StreamReader(FileHandling.secretFilePath);
             int num = 1;
@@ -68,15 +79,15 @@ namespace PasswordKeeper
                 if (num % 3 == 1)
                 {
                     currCredential = new Credential();
-                    currCredential.Description = encryptedstring.Decrypt();
+                    currCredential.Description = encryptionObj.Decrypt(encryptedstring);
                 }
                 else if (num % 3 == 2)
                 {
-                    currCredential.UserName = encryptedstring.Decrypt();
+                    currCredential.UserName = encryptionObj.Decrypt(encryptedstring);
                 }
                 else
                 {
-                    currCredential.Pwd = encryptedstring.Decrypt();
+                    currCredential.Pwd = encryptionObj.Decrypt(encryptedstring);
                     currCredential.id = num / 3;
                     credentials.Add(currCredential);
                 }
@@ -87,23 +98,24 @@ namespace PasswordKeeper
             return credentials;
         }
 
-        public static void ModifyOperation(Credential credential)
+        public static void ModifyOperation(Credential credential,ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             List<string> dataFile = File.ReadAllLines(FileHandling.secretFilePath).ToList<string>();
             // credentials.
             for (int index = 0; index < dataFile.Count; index++)
             {
                 if (3 * (credential.id - 1) == index)
                 {
-                    dataFile[index] = credential.Description.Encrypt();
+                    dataFile[index] = encryptionObj.Encrypt(credential.Description);
                 }
                 else if (3 * (credential.id - 1) + 1 == index)
                 {
-                    dataFile[index] = credential.UserName.Encrypt();
+                    dataFile[index] = encryptionObj.Encrypt(credential.UserName);
                 }
                 else if (3 * (credential.id - 1) + 2 == index)
                 {
-                    dataFile[index] = credential.Pwd.Encrypt();
+                    dataFile[index] = encryptionObj.Encrypt(credential.Pwd);
                 }
             }
             string[] contents = dataFile.ToArray();
@@ -122,10 +134,10 @@ namespace PasswordKeeper
 
         #region obsolete
         [Obsolete]
-        public static void DeleteOperation()
+        public static void DeleteOperation( ICryptoAlgorithm algo)
         {
             Console.WriteLine("Which one to delete ? ");
-            FileHandling.ViewAll();
+            FileHandling.ViewAll(algo);
             int num = int.Parse(Console.ReadLine());
             List<string> expr_29 = File.ReadAllLines(FileHandling.secretFilePath).ToList<string>();
             expr_29.RemoveAt(3 * num - 1);
@@ -136,15 +148,16 @@ namespace PasswordKeeper
         }
 
         [Obsolete]
-        public static void ModifyOperation()
+        public static void ModifyOperation(ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             // FileHandling.ViewAll();
             int num = int.Parse(Console.ReadLine());
             StreamReader streamReader = new StreamReader(FileHandling.secretFilePath);
             string[] array = File.ReadAllLines(FileHandling.secretFilePath);
             for (int i = 1; i <= num * 3; i++)
             {
-                string str = streamReader.ReadLine().Decrypt();
+                string str = encryptionObj.Decrypt(streamReader.ReadLine());
                 if (i >= 3 * num - 2 && i <= 3 * num)
                 {
                     if (i == 3 * num - 2)
@@ -164,7 +177,7 @@ namespace PasswordKeeper
                     if (text.Length > 1)
                     {
                         FileHandling.IsChange = true;
-                        array[i - 1] = text.Substring(1).Encrypt();
+                        array[i - 1] = encryptionObj.Encrypt(text.Substring(1));
                     }
                 }
             }
@@ -176,17 +189,18 @@ namespace PasswordKeeper
         }
 
         [Obsolete]
-        public static void InsertOperation()
+        public static void InsertOperation(ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             string text;
             do
             {
                 Console.WriteLine("Enter the name of site:");
-                string str = Console.ReadLine().Encrypt();
+                string str = encryptionObj.Encrypt(Console.ReadLine());
                 Console.WriteLine("USERNAME : ");
-                string str2 = Console.ReadLine().Encrypt();
+                string str2 = encryptionObj.Encrypt(Console.ReadLine());
                 Console.WriteLine("Enter the PASSWORD :");
-                string str3 = Console.ReadLine().Encrypt();
+                string str3 = encryptionObj.Encrypt(Console.ReadLine());
                 File.AppendAllText(FileHandling.secretFilePath, "\n" + str);
                 File.AppendAllText(FileHandling.secretFilePath, "\n" + str2);
                 File.AppendAllText(FileHandling.secretFilePath, "\n" + str3);
@@ -197,14 +211,15 @@ namespace PasswordKeeper
         }
 
         [Obsolete("Use ReadCredential instead")]
-        public static void ReadOperation()
+        public static void ReadOperation(ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             // FileHandling.ViewAll();
             int num = int.Parse(Console.ReadLine());
             StreamReader streamReader = new StreamReader(FileHandling.secretFilePath);
             for (int i = 1; i <= num * 3; i++)
             {
-                string text = streamReader.ReadLine().Decrypt();
+                string text = encryptionObj.Decrypt(streamReader.ReadLine());
                 if (i == 3 * num - 1)
                 {
                     Console.WriteLine(" username : " + text + " . copied to clipboard");
@@ -214,7 +229,7 @@ namespace PasswordKeeper
             }
             Console.WriteLine("\n\n Press a key for password . . ");
             Console.ReadKey();
-            CommandLine.RunCopy(streamReader.ReadLine().Decrypt());
+            CommandLine.RunCopy(encryptionObj.Decrypt(streamReader.ReadLine()));
             CommandLine.RunClear();
             Console.WriteLine("\n\tOK.");
             streamReader.Close();
@@ -250,8 +265,9 @@ namespace PasswordKeeper
             return dataTable;
         }
 
-        public static void ConvertFileOperation(string oldfile)
+        public static void ConvertFileOperation(string oldfile,ICryptoAlgorithm algo)
         {
+            var encryptionObj = new CredentialsEncryption(algo);
             StreamReader streamReader = new StreamReader(oldfile);
             bool flag = true;
             string plaintext;
@@ -259,12 +275,12 @@ namespace PasswordKeeper
             {
                 if (flag)
                 {
-                    File.AppendAllText(FileHandling.secretFilePath, plaintext.Encrypt());
+                    File.AppendAllText(FileHandling.secretFilePath, encryptionObj.Encrypt( plaintext));
                     flag = false;
                 }
                 else
                 {
-                    File.AppendAllText(FileHandling.secretFilePath, "\n" + plaintext.Encrypt());
+                    File.AppendAllText(FileHandling.secretFilePath, "\n" + encryptionObj.Encrypt(plaintext));
                 }
             }
             streamReader.Close();

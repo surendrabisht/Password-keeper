@@ -41,20 +41,21 @@
             // 
             this.lblPageInfo.AutoSize = true;
             this.lblPageInfo.BackColor = System.Drawing.Color.Transparent;
-            this.lblPageInfo.Font = new System.Drawing.Font("Lucida Sans", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPageInfo.Location = new System.Drawing.Point(183, 29);
+            this.lblPageInfo.Font = new System.Drawing.Font("Lucida Sans", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPageInfo.Location = new System.Drawing.Point(203, 36);
             this.lblPageInfo.Name = "lblPageInfo";
-            this.lblPageInfo.Size = new System.Drawing.Size(487, 32);
+            this.lblPageInfo.Size = new System.Drawing.Size(486, 32);
             this.lblPageInfo.TabIndex = 0;
             this.lblPageInfo.Text = "One-time Configuration Details:";
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.Chartreuse;
-            this.btnSave.Font = new System.Drawing.Font("Lucida Console", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(279, 351);
+            this.btnSave.Font = new System.Drawing.Font("Lucida Console", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSave.Location = new System.Drawing.Point(310, 439);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(165, 47);
+            this.btnSave.Size = new System.Drawing.Size(183, 59);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -64,8 +65,8 @@
             // 
             this.lbKeyUsed.AutoSize = true;
             this.lbKeyUsed.BackColor = System.Drawing.Color.Transparent;
-            this.lbKeyUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbKeyUsed.Location = new System.Drawing.Point(58, 140);
+            this.lbKeyUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbKeyUsed.Location = new System.Drawing.Point(64, 175);
             this.lbKeyUsed.Name = "lbKeyUsed";
             this.lbKeyUsed.Size = new System.Drawing.Size(179, 29);
             this.lbKeyUsed.TabIndex = 2;
@@ -75,8 +76,8 @@
             // 
             this.lblSafetyKey.AutoSize = true;
             this.lblSafetyKey.BackColor = System.Drawing.Color.Transparent;
-            this.lblSafetyKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSafetyKey.Location = new System.Drawing.Point(58, 223);
+            this.lblSafetyKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblSafetyKey.Location = new System.Drawing.Point(64, 279);
             this.lblSafetyKey.Name = "lblSafetyKey";
             this.lblSafetyKey.Size = new System.Drawing.Size(322, 29);
             this.lblSafetyKey.TabIndex = 3;
@@ -84,29 +85,32 @@
             // 
             // txtEncryptionKey
             // 
-            this.txtEncryptionKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEncryptionKey.Location = new System.Drawing.Point(439, 140);
+            this.txtEncryptionKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtEncryptionKey.Location = new System.Drawing.Point(488, 175);
+            this.txtEncryptionKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEncryptionKey.Name = "txtEncryptionKey";
             this.txtEncryptionKey.PasswordChar = '*';
-            this.txtEncryptionKey.Size = new System.Drawing.Size(304, 35);
+            this.txtEncryptionKey.Size = new System.Drawing.Size(337, 35);
             this.txtEncryptionKey.TabIndex = 1;
             // 
             // txtAuthenticationKey
             // 
-            this.txtAuthenticationKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAuthenticationKey.Location = new System.Drawing.Point(439, 220);
+            this.txtAuthenticationKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtAuthenticationKey.Location = new System.Drawing.Point(488, 275);
+            this.txtAuthenticationKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAuthenticationKey.Name = "txtAuthenticationKey";
             this.txtAuthenticationKey.PasswordChar = '*';
-            this.txtAuthenticationKey.Size = new System.Drawing.Size(304, 35);
+            this.txtAuthenticationKey.Size = new System.Drawing.Size(337, 35);
             this.txtAuthenticationKey.TabIndex = 2;
             // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
-            this.btnCancel.Font = new System.Drawing.Font("Lucida Console", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(632, 351);
+            this.btnCancel.Font = new System.Drawing.Font("Lucida Console", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancel.Location = new System.Drawing.Point(702, 439);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(133, 47);
+            this.btnCancel.Size = new System.Drawing.Size(148, 59);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -114,11 +118,11 @@
             // 
             // OneTimeConfigForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BackgroundImage = global::PasswordKeeper.Properties.Resources.BackgroundLocker;
-            this.ClientSize = new System.Drawing.Size(791, 433);
+            this.BackgroundImage = global::PasswordKeeper.Resource1.BackgroundLocker;
+            this.ClientSize = new System.Drawing.Size(879, 541);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtAuthenticationKey);
@@ -129,6 +133,7 @@
             this.Controls.Add(this.lblPageInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.HelpButton = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "OneTimeConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "First Time Configuration";

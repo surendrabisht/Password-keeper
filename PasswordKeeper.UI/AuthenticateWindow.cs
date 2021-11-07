@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordKeeper.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,7 @@ namespace PasswordKeeper
         private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            if (!String.IsNullOrEmpty( textBox1.Text) && textBox1.Text.Equals(Constants.AuthenticateKey))
+            if (!String.IsNullOrEmpty( textBox1.Text) && textBox1.Text.Equals(StartupSettings.GetInstance().AuthenticateKey))
             this.DialogResult= DialogResult.OK;         
         }
 
