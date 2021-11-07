@@ -7,27 +7,33 @@ using System.Threading.Tasks;
 namespace PasswordKeeper
 {
 
-    internal static class StringDecryptEncryptExtensions
+    public class CredentialsEncryption
     {
-
-        public static string Encrypt(this string plaintext)
+        readonly ICryptoAlgorithm algo = null;
+        public CredentialsEncryption(ICryptoAlgorithm algo)
         {
-            return StringCipher.Encrypt(plaintext, Constants.EncryptionKey);
+            this.algo = algo;
         }
 
-        public static string Decrypt(this string encryptedstring)
+        public string Encrypt(string plaintext)
         {
-            return StringCipher.Decrypt(encryptedstring, Constants.EncryptionKey);
+            return algo.Encrypt(plaintext, StartupSettings.GetInstance().encryptionKey);
         }
 
-        public static string EncryptKey(this string key)
+        public string Decrypt(string encryptedstring)
         {
-            return StringCipher.Encrypt(key,Constants.DefaultEncryptionKey);
+            return algo.Decrypt(encryptedstring, StartupSettings.GetInstance().encryptionKey);
         }
 
-        public static string DecryptKey(this string key)
+
+        public string EncryptKey(string key)
         {
-            return StringCipher.Decrypt(key,Constants.DefaultEncryptionKey);
+            return algo.Encrypt(key, StartupSettings.DefaultEncryptionKey);
+        }
+
+        public string DecryptKey(string key)
+        {
+            return algo.Decrypt(key, StartupSettings.DefaultEncryptionKey);
         }
     }
 }

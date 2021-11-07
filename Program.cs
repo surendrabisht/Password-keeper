@@ -17,19 +17,22 @@ namespace PasswordKeeper
         [STAThread]
         static void Main()
         {
+            //RijndaelExample.Main1();
+            //return;
+            
             try
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                if (!File.Exists(Constants.CredentialFileName))
+                if (!File.Exists(StartupSettings.CredentialFileName))
                 {
                     OneTimeConfigForm keyEnterForm = new OneTimeConfigForm();
                     if (keyEnterForm.ShowDialog() == DialogResult.OK)
                     {
-                        Constants.SaveKeys(keyEnterForm.EncryptionKey, keyEnterForm.AuthenticationKey);
+                        StartupSettings.GetInstance().SaveKeys(keyEnterForm.EncryptionKey, keyEnterForm.AuthenticationKey);
                         //Create File And close StreamWriter Object.
-                        File.Create(Constants.CredentialFileName).Close();
+                        File.Create(StartupSettings.CredentialFileName).Close();
                     }
                     else
                     {
@@ -42,6 +45,7 @@ namespace PasswordKeeper
             catch(Exception ex)
             {
                 MessageBox.Show("Error Occurred. For More information, refer below: \n"+ex.InnerException," Error! ",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Console.WriteLine(ex);
             }
         }
     }

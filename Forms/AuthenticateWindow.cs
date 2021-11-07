@@ -20,7 +20,7 @@ namespace PasswordKeeper
         private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            if (!String.IsNullOrEmpty( textBox1.Text) && textBox1.Text.Equals(Constants.AuthenticateKey))
+            if (!String.IsNullOrEmpty( textBox1.Text) && textBox1.Text.Equals(StartupSettings.GetInstance().authenticateKey))
             this.DialogResult= DialogResult.OK;         
         }
 

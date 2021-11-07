@@ -122,16 +122,16 @@ namespace PasswordKeeper
         private void SaveWebsiteCredentials(Credential credential)
         {
             if (credential.id > 0)
-                FileHandling.ModifyOperation(credential);
+                FileHandling.ModifyOperation(credential,StartupSettings.CredentialsEncryptionAlgo);
             else
-                FileHandling.InsertOperation(credential);
+                FileHandling.InsertOperation(credential, StartupSettings.CredentialsEncryptionAlgo);
 
             refreshDataInGrid();
         }
 
         private BindingList<Credential> GetAllCredentials()
         {
-            var passwords = FileHandling.ViewAll();
+            var passwords = FileHandling.ViewAll(StartupSettings.CredentialsEncryptionAlgo);
             var bindingList = new BindingList<Credential>(passwords);
             return bindingList;
         }
@@ -141,7 +141,7 @@ namespace PasswordKeeper
         {
             var credential = GetSelectedCredential();
             if (credential != null)
-                FileHandling.ReadCredential(CopyValue.UserId, credential.id);
+                FileHandling.ReadCredential(CopyValue.UserId, credential.id, StartupSettings.CredentialsEncryptionAlgo);
         }
 
         //copy password to clipboard
@@ -149,7 +149,7 @@ namespace PasswordKeeper
         {
             var credential = GetSelectedCredential();
             if (credential != null)
-                FileHandling.ReadCredential(CopyValue.Password, credential.id);
+                FileHandling.ReadCredential(CopyValue.Password, credential.id, StartupSettings.CredentialsEncryptionAlgo);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,6 +177,31 @@ namespace PasswordKeeper
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
            dataGridView1.DataSource= credentialsBindingList.Where(credential => credential.Description.ToLower().Contains(txtbxSearch.Text.ToLower())).ToList<Credential>();
+        }
+
+
+        private void to256BlockSize(object sender, EventArgs e)
+        {
+            foreach (Credential cr in credentialsBindingList)
+            {
+                FileHandling.ExportOperation(cr, new AES256Algorithm(), StartupSettings.CredentialFileName + "_to256");
+            }
+        }
+
+        private void to128blockSize(object sender, EventArgs e)
+        {
+            foreach (Credential cr in credentialsBindingList)
+            {
+                FileHandling.ExportOperation(cr, new AES128Algorithm(), StartupSettings.CredentialFileName + "_to128");
+            }
+        }
+
+        private void toPlainText(object sender, EventArgs e)
+        {
+            foreach (Credential cr in credentialsBindingList)
+            {
+                FileHandling.ExportOperation(cr, new NoCryptoAlgorithm(), StartupSettings.CredentialFileName + "_toPlainText");
+            }
         }
     }
 }
