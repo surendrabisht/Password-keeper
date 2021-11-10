@@ -21,9 +21,8 @@ namespace PasswordKeeper
         public static ICryptoAlgorithm CredentialsEncryptionAlgo = null;
         CredentialsEncryption encryptionObj = null;
         static StartupSettings _instance = null;
-        public String encryptionKey = null;
-        public String authenticateKey = null;
-
+        public String EncryptionKey { get { return encryptionObj.DecryptKey(ConfigurationManager.AppSettings[StartupSettings.EncryptionKeyConfig]); } }
+        public String AuthenticateKey { get { return encryptionObj.DecryptKey(ConfigurationManager.AppSettings[StartupSettings.AuthenticateKeyConfig]); } }
 
         private ICryptoAlgorithm getAlgoInstance(String algo_name)
         {
@@ -42,8 +41,6 @@ namespace PasswordKeeper
             StartupSettings.ConfigEncryptionAlgo = getAlgoInstance(ConfigurationManager.AppSettings[StartupSettings.ConfigEncryptionAlgoKey]);
             StartupSettings.CredentialsEncryptionAlgo = getAlgoInstance(ConfigurationManager.AppSettings[StartupSettings.CredentialsEncryptionAlgoKey]);
             this.encryptionObj = new CredentialsEncryption(StartupSettings.ConfigEncryptionAlgo);
-            this.encryptionKey = encryptionObj.DecryptKey(ConfigurationManager.AppSettings[StartupSettings.EncryptionKeyConfig]);
-            this.authenticateKey = encryptionObj.DecryptKey(ConfigurationManager.AppSettings[StartupSettings.AuthenticateKeyConfig]);
         }
 
 

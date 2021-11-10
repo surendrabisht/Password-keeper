@@ -17,12 +17,12 @@ namespace PasswordKeeper
 
         public string Encrypt(string plaintext)
         {
-            return algo.Encrypt(plaintext, StartupSettings.GetInstance().encryptionKey);
+            return algo.Encrypt(plaintext, StartupSettings.GetInstance().EncryptionKey);
         }
 
         public string Decrypt(string encryptedstring)
         {
-            return algo.Decrypt(encryptedstring, StartupSettings.GetInstance().encryptionKey);
+            return algo.Decrypt(encryptedstring, StartupSettings.GetInstance().EncryptionKey);
         }
 
 
