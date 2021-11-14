@@ -14,3 +14,10 @@ A window-based solution to keep track of all your credentials.
 4. Now once user enters the application, one can add his credentials, view all of them. Also right click on site and select copy to copy username and password individually and directly paste to websites while using any site.
 
 5. One can also search his credentials for any site, using search bar above. 
+
+
+
+****dotnet core Commands to build, run *********************************
+dotnet build
+dotnet watch run
+dotnet run
