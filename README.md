@@ -17,7 +17,7 @@ A window-based solution to keep track of all your credentials.
 
 
 
-****dotnet core Commands to build, run *********************************
-dotnet build
-dotnet watch run
-dotnet run
+### dotnet core Commands to build, run 
+- dotnet build
+- dotnet watch run
+- dotnet run
