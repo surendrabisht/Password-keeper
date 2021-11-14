@@ -43,8 +43,9 @@ namespace PasswordKeeper.BLL
         {
             var encryptionObj = new CredentialsEncryption(algo);
             if (thread.ThreadState == ThreadState.Running || thread.ThreadState==ThreadState.WaitSleepJoin)
-            {
-                thread.Abort();            
+            {   
+                thread.Abort();
+                //thread.Interrupt();            
             }
 
             thread = new Thread(CommandLine.RunClear);

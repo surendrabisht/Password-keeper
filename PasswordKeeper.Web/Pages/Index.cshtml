@@ -1,0 +1,18 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Password Keeper -> App made by Surendra Bisht </p>
+</div>
+
+<ul>
+    <li>@AppConfig.GetInstance().CredentialsFile</li>
+    <li><a href="Configure">One time Setup for Password Utility</a></li>
+    <li class ="" ><a href="AddCredential">Add Credentials</a></li>
+    <li><a href="ViewCredentials">view</a></li>
+</ul>
