@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PasswordKeeper.BLL;
 
 namespace PasswordKeeper.Web.Pages
 {
@@ -18,6 +19,9 @@ namespace PasswordKeeper.Web.Pages
             _logger = logger;
             AppConfig appConfig = AppConfig.GetInstance();
             configuration.GetSection("PasswordkeeperConfig").Bind(appConfig);
+            var credentials_encryption = new CredentialsEncryption(new AES128Algorithm());
+            appConfig.EncryptionKey = credentials_encryption.DecryptKey(appConfig.EncryptionKey);
+            appConfig.AuthenticationKey = credentials_encryption.DecryptKey(appConfig.AuthenticationKey);
         }
 
         public void OnGet()

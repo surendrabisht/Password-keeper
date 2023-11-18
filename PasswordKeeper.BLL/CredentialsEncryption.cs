@@ -26,14 +26,14 @@ namespace PasswordKeeper.BLL
         }
 
 
-        public string EncryptKey(string key, string defaultEncryptionKey)
+        public string EncryptKey(string key)
         {
-            return algo.Encrypt(key, defaultEncryptionKey);
+            return algo.Encrypt(key, StartupSettings.DefaultEncryptionKey);
         }
 
-        public string DecryptKey(string key,string defaultEncryptionKey)
+        public string DecryptKey(string key)
         {
-            return algo.Decrypt(key, defaultEncryptionKey);
+            return algo.Decrypt(key, StartupSettings.DefaultEncryptionKey);
         }
     }
 }
